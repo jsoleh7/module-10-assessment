@@ -26,14 +26,20 @@ function getMostCommonGenres(books) {
     } 
     return bookGenre;
   }, {});
-  let bookGenreArray = [];
-  Object.keys(result).forEach((genre) => {
-    bookGenreArray.push({ name: genre, count: result[genre] });
-  });
+  let bookGenreArray = getBookGenreArray(result);
+ 
   bookGenreArray = bookGenreArray.sort((bookOne, bookTwo) => bookOne.count < bookTwo.count ? 1 : -1)
   console.log(bookGenreArray)
   return bookGenreArray.splice(0,5)
 }
+
+function getBookGenreArray(bookGenre) {
+  let bookGenreArray = [];
+  Object.keys(bookGenre).forEach((genre) => {
+    bookGenreArray.push({ name: genre, count: bookGenre[genre] });
+  });
+  return bookGenreArray
+} 
 
 function getMostPopularBooks(books) {
   let result = books.reduce((bookBorrows, book) => {
